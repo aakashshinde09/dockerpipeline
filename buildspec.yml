@@ -1,14 +1,12 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      nodejs: 18
 
   pre_build:
     commands:
       - echo "Installing dependencies..."
-  
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 010928179293.dkr.ecr.us-east-1.amazonaws.com
+
   build:
     commands:
       - docker build -t akashshinde/docapp .
