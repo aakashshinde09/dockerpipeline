@@ -19,8 +19,6 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
-      # Enable buildx for multi-platform builds
-      - docker buildx create --use
       # Build for both ARM64 and AMD64 architectures (optional)
       - docker buildx build --platform linux/amd64,linux/arm64 -t dockerapp .
       # Or, if you only want AMD64 (since that's what you seem to need)
