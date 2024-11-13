@@ -1,4 +1,4 @@
-From nginx
+FROM nginx
 COPY . /opt
 WORKDIR /opt/angular-frontend
 RUN apt update
