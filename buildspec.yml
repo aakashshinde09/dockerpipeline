@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+
+  pre_build:
+    commands:
+      - echo "Installing dependencies..."
+  
+  build:
+    commands:
+      - docker build -t akashshinde/docapp .
+      - docker tag akashshinde/docapp:latest 010928179293.dkr.ecr.us-east-1.amazonaws.com/akashshinde/docapp:latest
+      - docker push 010928179293.dkr.ecr.us-east-1.amazonaws.com/akashshinde/docapp:latest
+artifacts:
+  files:
+    - '**/*'  
+  
