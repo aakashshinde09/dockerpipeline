@@ -1,5 +1,10 @@
 version: 0.2
 
+env:
+  parameter-store:
+    DOCKER_REGISTRY_USERNAME: /myapp/docker-credentials/username
+    DOCKER_REGISTRY_PASSWORD: /myapp/docker-credentials/password
+
 phases:
   pre_build:
     commands:
@@ -13,6 +18,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
+      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
       - docker build -t dockerapp .
       - docker tag dockerapp:latest 010928179293.dkr.ecr.us-east-1.amazonaws.com/dockerapp:latest
   post_build:
