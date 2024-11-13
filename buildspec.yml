@@ -5,13 +5,15 @@ phases:
   pre_build:
     commands:
       - echo "Installing dependencies..."
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 010928179293.dkr.ecr.us-east-1.amazonaws.com
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI=010928179293.dkr.ecr.us-east-1.amazonaws.com/dockerapp
 
   build:
     commands:
-      - docker build -t akashshinde/docapp .
-      - docker tag akashshinde/docapp:latest 010928179293.dkr.ecr.us-east-1.amazonaws.com/akashshinde/docapp:latest
-      - docker push 010928179293.dkr.ecr.us-east-1.amazonaws.com/akashshinde/docapp:latest
+      - docker build -t dockerapp .
+      - docker tag dockerapp:latest 010928179293.dkr.ecr.us-east-1.amazonaws.com/dockerapp:latest
+      - docker push 010928179293.dkr.ecr.us-east-1.amazonaws.com/dockerapp:latest
 artifacts:
   files:
     - '**/*'  
