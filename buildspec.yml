@@ -30,3 +30,4 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
       - docker push 010928179293.dkr.ecr.us-east-1.amazonaws.com/dockerapp:latest 
+
